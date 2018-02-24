@@ -25,7 +25,7 @@ app.get("/multireddits", function(req,res){
     console.log(req.body);
     let data = Twitter.getTags(req,res);
 });
-app.post("/multireddits", function(req,res){
+app.post("/multireddits", function(req,res){ //
     console.log(req);
     let data = Twitter.getTags(req,res);
 })
