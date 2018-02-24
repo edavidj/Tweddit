@@ -1,7 +1,7 @@
 const async     = require("async");
 const snoowrap  = require("snoowrap")
 const Request   = require("./Request");
-const key       = "9T_nq87zJcj0ZBVLdg8lrD59Gek"
+const key       = "aQBK4Fezb4nnslJkP7uuhJv8rj8"
 
 module.exports = (function(){
 
