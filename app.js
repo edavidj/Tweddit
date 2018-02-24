@@ -12,9 +12,9 @@ app.get("/multireddits", function(req,res){
     let data = Twitter.getTags(req,res);
 });
 app.get("/test", function(req,res){
-  Reddit.createMulti(res,["anime", "technology", "gender_issues"]);
+  // Reddit.createMulti(res,["anime", "technology", "gender_issues"]);
+  Reddit.test(res);
 })
-
 let port = 3000; //change to heroku later
 app.listen(port, function(err){
     if(err) throw error;

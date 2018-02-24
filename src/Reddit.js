@@ -1,18 +1,18 @@
 const async     = require("async");
 const snoowrap  = require("snoowrap")
 const Request   = require("./Request");
-const key       = "Un7AATWmZaSxPBN_Xw98toc1p50"
+const key       = "aQBK4Fezb4nnslJkP7uuhJv8rj8"
 
 module.exports = (function(){
 
-      const r = new snoowrap({
-        userAgent: 'Tweedit by Mirira',
-        clientId: '1kSrspmMM6VjyQ',
-        clientSecret: 'vCuw5wjGs5b_HJYyPmx6ur-enfc',
-        username: 'Mirira',
-        password: '323450205',
-        refreshToken: key
-      })
+      // const r = new snoowrap({
+      //   userAgent: 'Tweedit by Mirira',
+      //   clientId: '1kSrspmMM6VjyQ',
+      //   clientSecret: 'vCuw5wjGs5b_HJYyPmx6ur-enfc',
+      //   username: 'Mirira',
+      //   password: '323450205',
+      //   refreshToken: key
+      // })
     //private functions
     /**
      * Get related subreddits for each tag and create multi reddit from it
@@ -44,44 +44,34 @@ module.exports = (function(){
               });
             }
             console.log(formattedSubs);
-            // let json_data = {
-            //   "description_md":"No",
-            //   "display_name": "test",
-            //   "icon_name": "None",
-            //   "key_color":"#AABBCC",
-            //   "subreddits": [{"name": "anime"}],
-            //   "visibility":"public",
-            //   "weighting_scheme": "classic",
-            // }
-            // let multi_options = {
-            //   url:"https://oauth.reddit.com/api/multi/multipath",
-            //   method:"POST",
-            //   body: {
-            //     model:json_data,
-            //     multipath: "/test"
-            //   },
-            //   headers:{
-            //     'User-Agent':       'Tweedit by Mirira',
-            //     "Authorization": "bearer " + key
-            //   },
-            //   json:true
-            // }
-            // Request(res,multi_options, (response) => {
-            //   console.log(response);
-            // });
-            var multiReddit = r.getUser('mirira').getMultireddit('tweedit').copy({'mirira': 'tweedit_mirira'}).toJSON();
-            console.log(multiReddit);
-                   // for(var i of formattedSubs){
-                   //   multiReddit.addSubreddit(i);
-                   // }
-                //})
 
+            Request(res,multi_options, (response) => {
+              console.log(response);
+            });
         });
     }
     return {
         //public methods
         createMulti: function(res, tags){
             createMulti(res,tags);
-        }
+         },test: function(res){
+        let multi_copy = {
+            url:"https://oauth.reddit.com/api/multi/copy",
+            method:"POST",
+            body: {
+              display_name: "tweeditcopy",
+              from: "user/Mirira/m/tweedit",
+              to: "user/edavidj1"
+            },
+            headers:{
+              'User-Agent': 'Tweedit by Mirira',
+              "Authorization": "bearer " + key
+            },
+            json: true
+          }
+          Request(res, multi_copy, (response)=>{
+            res.send(response);
+          })
+         }
     };
 })();
