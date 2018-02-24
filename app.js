@@ -25,6 +25,10 @@ app.get("/multireddits", function(req,res){
     console.log(req.body);
     let data = Twitter.getTags(req,res);
 });
+app.post("/multireddits", function(req,res){
+    console.log(req);
+    let data = Twitter.getTags(req,res);
+})
 app.get("/test", function(req,res){
   Reddit.createMulti(res,["anime", "technology", "gender_issues"]);
 })
