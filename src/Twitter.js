@@ -1,6 +1,8 @@
 var indico = require("indico.io"),
+    Reddit = require("./Reddit"),
     Request = require("./Request"),
     http    = require("https");
+indico.apiKey = "a94abe43d1aea51d0b891c7d09a781ae";
 module.exports = (function(){
     //private functions
     /**
@@ -20,13 +22,20 @@ module.exports = (function(){
     }
     function getTags(req,res){
         let user = req.query.q;
-        let url ="";
-        Request(url, (posts) => {
+        let options = {
+
+        }
+        Request(options, (posts) => {
             let tags = [];
             for(var i = 0; i < posts.length; i++){
-                
+                indico.text_tags(posts[i].text)
+                .then(parseIndico)
+                .then((tag) => {
+                    tags.push(tag);
+                });
             }
-
+            console.log(tags);
+            // Reddit.createMulti(tags);
         });
     }
     return {
