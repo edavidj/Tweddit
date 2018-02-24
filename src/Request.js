@@ -1,16 +1,13 @@
-module.exports =  function request(url, callback){
-    return https.get(url, (resp) => {        
-        let data = "";
-        // A chunk of data has been recieved.
-        resp.on('data', (chunk) => {
-            data += chunk;
-        });
-        // The whole response has been received. Print out the result.
-        resp.on('end', () => {
-            utfstring = unescape(encodeURIComponent(data));
-            callback(JSON.parse(utfstring));
-        });        
-    }).on("error", (err) => {
-    console.log("Error: " + err.message);
-    });
+var request = require('request');
+// Start the request
+module.exports = (res, options, callback) => {
+  request(options, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        // Print out the response body
+        callback(body);
+    } else {
+      console.log(error);
+      console.log(response);
+    }
+  });
 }

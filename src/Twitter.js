@@ -5,14 +5,14 @@ module.exports = (function(){
     //private functions
     /**
      * Get timeline posts
-     * @param {String} user 
+     * @param {String} user
      */
     var parseIndico = (res) => {
         //clarify that res structure is just api response
         let maxKey = "anime";
         let keys = Object.keys(res);
         for(var i of keys){
-            if(res[i] > res[maxKey]) { 
+            if(res[i] > res[maxKey]) {
                 maxKey = res[i];
             }
         }
@@ -24,10 +24,10 @@ module.exports = (function(){
         Request(url, (posts) => {
             let tags = [];
             for(var i = 0; i < posts.length; i++){
-                
-            }
 
+            }
         });
+
     }
     return {
         //public methods
