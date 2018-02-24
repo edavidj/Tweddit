@@ -3,6 +3,8 @@ var indico = require("indico.io"),
     Request = require("./Request"),
     Twitter = require("twitter"),
     async   = require("async"),
+    passport = require("passport"),
+    TwitterStrategy = require("passport-twitter"),
     http    = require("https");
 indico.apiKey = "a94abe43d1aea51d0b891c7d09a781ae";
 var client = new Twitter({
@@ -11,6 +13,9 @@ var client = new Twitter({
     access_token_key:"1038895591-xW0tMPneNFXloxFVshZ5hZvUEUQeBxbP1TQjM8y",
     access_token_secret:"j3e41BNZ9NsujASwBptK3RJQu5e3DVS9Hr0q0SMlDrkN7"
 })
+passport.use(new TwitterStrategy({
+    consumer_key
+}))
 module.exports = (function(){
     //private functions
     /**
