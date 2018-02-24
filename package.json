@@ -1,0 +1,38 @@
+{
+  "name": "tweddit",
+  "version": "1.0.0",
+  "description": "app to convert twitter posts to subreddit suggestions",
+  "main": "app.js",
+  "dependencies": {
+    "async": "^2.6.0",
+    "express": "^4.16.2",
+    "indico.io": "^0.10.5",
+    "passport": "^0.4.0",
+    "passport-twitter": "^1.0.4",
+    "snoowrap": "^1.15.2",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edavidj/Tweedit.git"
+  },
+  "keywords": [
+    "twitter",
+    "indico",
+    "reddit",
+    "api",
+    "javascript",
+    "node"
+  ],
+  "author": "Ethan Johnston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edavidj/Tweedit/issues"
+  },
+  "homepage": "https://github.com/edavidj/Tweedit#readme"
+}

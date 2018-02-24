@@ -43,12 +43,47 @@ module.exports = (function(){
                 "name":i.name
               });
             }
-            console.log(formattedSubs);
-
-            Request(res,multi_options, (response) => {
-              console.log(response);
-            });
+            res.send(JSON.stringify(prioritySort(formattedSubs)));
         });
+    }
+    /**
+     *
+     * {
+     *  "leagueoflegends": 5,
+     *  "anime": 4
+     * }
+     */
+    function prioritySort(data){
+        var checked = new Set();
+        var counts = {};
+        var output = [];
+        for(var i = 0; i < data.length; i++){
+            if(!checked.has(data[i].name)){
+                checked.add(data[i].name);
+                counts[data[i].name] = 1;
+            } else {
+                counts[data[i].name]++;
+            }
+        }
+        let keys = Object.keys(counts);
+        for(var j = 0; j < keys.length; j++){
+            let o = {}
+            o[keys[j]] = counts[keys[j]];
+            output.push( o );
+        }
+        output.sort(function(a,b){
+            let cA = Object.values(a)[0];
+            let cB = Object.values(b)[0];
+            if(cA > cB){ return -1;}
+            if(cB > cA){ return 1;}
+            return 0;
+        });
+        let finalOut = [];
+        for(var k = 0; k < output.length; k++){
+            let key = Object.keys(output[k])[0];
+            finalOut.push(key);
+        }
+        return finalOut;
     }
     return {
         //public methods
