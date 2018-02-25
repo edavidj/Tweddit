@@ -46,7 +46,7 @@ module.exports = (function(){
             let outputArray = prioritySort(formattedSubs);
             console.log(outputArray);
             res.json({
-                loggedin: true, //not camel case smh
+                loggedIn: true, //not camel case smh
                 data: outputArray
             });
         });
