@@ -2,7 +2,7 @@ const async     = require("async");
 const snoowrap  = require("snoowrap");
 const Request   = require("./Request");
 const randtoken = require("rand-token");
-const key       = "JfBMdtdcMxZnAbPoGoO-GvNO2_M";
+const key       = "Whp_rCx6CInuHwCZK8VfQm3FHAM";
 
 
 module.exports = (function(){
