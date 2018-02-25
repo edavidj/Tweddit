@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended:true})); //parse form and query variable
  * @param req.query.username twitter username
  * @return link to multireddit
  */
-app.get("/multireddits", function(req,res){ //
+app.get("/multireddits", function(req,res){ /////////////
     let user = req.query.username;
     let data = Twitter.getTags(user,res);
 });
