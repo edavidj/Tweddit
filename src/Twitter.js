@@ -33,6 +33,7 @@ module.exports = (function(){
         return maxKey;
     }
     function getTags(user,res){
+        console.log(user);
         user = user.slice(1,user.length);
         let params = {screen_name:user};
         client.get('statuses/user_timeline', params, (err, tweets, response) => {
