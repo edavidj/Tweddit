@@ -13,9 +13,6 @@ var client = new Twitter({
     access_token_key:"1038895591-xW0tMPneNFXloxFVshZ5hZvUEUQeBxbP1TQjM8y",
     access_token_secret:"j3e41BNZ9NsujASwBptK3RJQu5e3DVS9Hr0q0SMlDrkN7"
 })
-passport.use(new TwitterStrategy({
-    consumer_key
-}))
 module.exports = (function(){
     //private functions
     /**
@@ -36,22 +33,29 @@ module.exports = (function(){
     }
     function getTags(req,res){
         let user = req.query.q;
-        let params = {screen_name:'Imaqtpielol'};
+        let params = {screen_name:'ahlvin_'};
         client.get('statuses/user_timeline', params, (err, tweets, response) => {
             var tags = [];
             async.each(tweets, function(tweet, callback){
                 indico.text_tags(tweet.text)
                 .then(parseIndico)
                 .then((tag) => {
-                    if(tag !== undefined){ tags.push(tag);}
-                    callback();
-                });
-            }, function(err){
-                if(err) throw err;
-                Reddit.createMulti(res,tags);
-            })           
-        });
+                    indico.sentiment(tweet.text)
+                      .then((sentiments) => {
+                        if((tag !== undefined) && (sentiments >= 0.40)){
+                            tags.push(tag);
+                        }
 
+                        console.log("yes")
+                        callback();
+                        })
+                    })
+                }, function(err){
+                    if(err) throw err;
+                    res.send(tags);
+                    Reddit.createMulti(res,tags);
+                });
+            });
     }
     return {
         //public methods

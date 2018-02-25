@@ -16,7 +16,7 @@ app.get("/test", function(req,res){
   Reddit.test(res);
 })
 
-let port = process.env.PORT; //change to heroku later
+let port = 3000; //change to heroku later
 app.listen(port, function(err){
     if(err) throw error;
     console.log("Tweddit is online!");
