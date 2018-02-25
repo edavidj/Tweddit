@@ -24,7 +24,7 @@ app.use(bodyParser.json({extended:true})); //parse form and query variables bett
  * @return link to multireddit 
  */
 app.get("/multireddits", function(req,res){
-    let user = req.;
+    let user = req.query.username;
     let data = Twitter.getTags(user,res);
 });
 app.post("/multireddits", function(req,res){ //
