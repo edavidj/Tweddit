@@ -1,7 +1,7 @@
 const async     = require("async");
 const snoowrap  = require("snoowrap")
 const Request   = require("./Request");
-const key       = "aQBK4Fezb4nnslJkP7uuhJv8rj8"
+const key       = "mLsQ-K60y8_5dFEqcWtRNhXKw8s"
 
 module.exports = (function(){
 
@@ -43,7 +43,12 @@ module.exports = (function(){
                 "name":i.name
               });
             }
-            res.send(JSON.stringify(prioritySort(formattedSubs)));
+            let outputArray = prioritySort(formattedSubs);
+            console.log(outputArray);
+            res.json({
+                loggedin: true, //not camel case smh
+                data: outputArray
+            });
         });
     }
     /**
