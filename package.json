@@ -10,6 +10,7 @@
     "indico.io": "^0.10.5",
     "passport": "^0.4.0",
     "passport-twitter": "^1.0.4",
+    "rand-token": "^0.4.0",
     "snoowrap": "^1.15.2",
     "twitter": "^1.7.1"
   },

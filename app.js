@@ -33,7 +33,8 @@ app.post("/multireddits", function(req,res){ //
     Twitter.getTags(user,res); //send them back to the front end
 })
 app.get("/test", function(req,res){
-  Reddit.createMulti(res,["anime", "technology", "gender_issues"]);
+  // Reddit.createMulti(res,["anime", "technology", "gender_issues"]);
+  Reddit.test(res);
 })
 app.get("/auth/twitter", function(req,res){
     passport.authenticate('twitter');
