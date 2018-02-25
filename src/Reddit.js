@@ -3,7 +3,7 @@ const snoowrap  = require("snoowrap");
 const Request   = require("./Request");
 const randtoken = require("rand-token");
 const key       = "JfBMdtdcMxZnAbPoGoO-GvNO2_M";
-var token       = randtoken.generate(16);
+
 
 module.exports = (function(){
 
@@ -47,10 +47,11 @@ module.exports = (function(){
             }
             let outputArray = prioritySort(formattedSubs);
             console.log(outputArray);
+            let multireddit = "https://reddit.com/user/Mirira/m/"+multiReddit(outputArray);
             res.json({
                 loggedIn: true, //not camel case smh
                 data: outputArray,
-                multireddit = ""
+                multireddit : multireddit
             });
             // multiReddit(formattedSubs);
             //res.send(JSON.stringify(prioritySort(formattedSubs)));
@@ -59,6 +60,7 @@ module.exports = (function(){
 
     function multiReddit(fs){
         let creatingMultiReddit = [];
+        var token       = randtoken.generate(16);
         r.getUser('mirira').getMultireddit('tweedit').copy({newName: token})
         .then(function(multiRed){
             console.log("i dont know why this is right nor why it is wrong")
@@ -67,11 +69,12 @@ module.exports = (function(){
         });
         r.getUser('mirira').getMultireddit(token).edit({visibility:'public'})
         for (var i = 0; i < fs.length; i++) {
-            if (i > 100) {
+            if (i >= 100) {
                 break
             }
-            creatingMultiReddit.push(r.getUser('mirira').getMultireddit(token).addSubreddit(fs[i].name));
+            creatingMultiReddit.push(r.getUser('mirira').getMultireddit(token).addSubreddit(fs[i]));
         }
+        return token
     }
 
     function prioritySort(data){
