@@ -50,13 +50,12 @@ module.exports = (function(){
                         if((tag !== undefined) && (sentiments >= 0.40)){
                             tags.push(tag);
                         }
-
-                        console.log("yes")
                         callback();
                         })
                     })
                 }, function(err){
                     if(err) throw err;
+                    if(tags.length === 0){ res.json();return;}
                     Reddit.createMulti(res,tags);
                 });
             });

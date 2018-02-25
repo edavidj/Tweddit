@@ -15,7 +15,7 @@ app.use(bodyParser.json({extended:true})); //parse form and query variables bett
 //     callbackURL:"https://powerful-coast-51545.herokuapp.com/auth/twitter/callback"
 // }), function(token, tokenSecret, profile, cb){
 //     User.findOrCreate({twitterId: profile.id}, function(err, user){
-
+//
 //     })
 // });
 /**
@@ -47,5 +47,5 @@ app.get("/auth/twitter/callback", function(req,res){
 })
 app.listen(process.env.PORT || 3000, function(err){
     if(err) throw err;
-    console.log("Tweedit has started!")
-})
+    console.log("Tweedit has started!");
+});
