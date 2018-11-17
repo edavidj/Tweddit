@@ -1,4 +1,4 @@
-var indico = require("indico.io"),
+const indico = require("indico.io"),
     Reddit = require("./Reddit"),
     Request = require("./Request"),
     Twitter = require("twitter"),
@@ -7,12 +7,12 @@ var indico = require("indico.io"),
     TwitterStrategy = require("passport-twitter"),
     http    = require("https");
 
-indico.apiKey = "a94abe43d1aea51d0b891c7d09a781ae";
-var client = new Twitter({
-    consumer_key: "5UkW1lm6uIi3sqjW59C1XPlYs",
-    consumer_secret: "d9j5XinzrnPUpgAzzHcifzgVjLpN65PvfgttAM5TPPzAksx8Od",
-    access_token_key:"1038895591-NKLUo7VqURfU3HGbLCgUbYIRYBwwSD5LB0vWEcM",
-    access_token_secret:"sXLhKWqJKOkJlkScAJJdu1xY66LRDOfOcCyIq5vYG5o0m"
+indico.apiKey = process.env.INDICO_KEY;
+const client = new Twitter({
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    access_token_key:process.env.TWITTER_TOKEN_KEY,
+    access_token_secret:process.env.TWITTER_TOKEN_SECRET
 });
 module.exports = (function(){
     //private functions
@@ -20,7 +20,7 @@ module.exports = (function(){
      * Get timeline posts
      * @param {String} user
      */
-    var parseIndico = (res) => {
+    const parseIndico = (res) => {
         //clarify that res structure is just api response
         let maxKey;
         let keys = Object.keys(res);
@@ -41,7 +41,7 @@ module.exports = (function(){
             // console.log(err);
             // console.log(tweets);
             // console.log(response);
-            async.each(tweets, function(tweet, callback){
+            async.each(tweets, (tweet, callback) => {
                 indico.text_tags(tweet.text)
                 .then(parseIndico)
                 .then((tag) => {
@@ -53,7 +53,7 @@ module.exports = (function(){
                         callback();
                         })
                     })
-                }, function(err){
+                }, (err) => {
                     if(err) throw err;
                     if(tags.length === 0){ res.json();return;}
                     Reddit.createMulti(res,tags);
@@ -62,7 +62,7 @@ module.exports = (function(){
     }
     return {
         //public methods
-        getTags: function(user,res){
+        getTags(user,res) {
             getTags(user,res);
         }
     };

@@ -1,23 +1,14 @@
-var express = require("express"),
+// require('dotenv').config();
+const express = require("express"),
     Twitter = require("./src/Twitter"),
     Reddit  = require("./src/Reddit"),
     passport = require("passport"),    
     bodyParser = require("body-parser"),
-    TwitterStrategy = require("passport-twitter"),
     app     = express();
 
 
 //init server settings
 app.use(bodyParser.json({extended:true})); //parse form and query variables better
-// passport.use(new TwitterStrategy({
-//     consumerKey: "rbh01lSKaAUfGZ1x7ikJGnOQi",
-//     consumerSecret: "M2hReBNQNKTM8mxtNfmCy86RkxBbctpXgGhdQK8eCJybioXnJ3",
-//     callbackURL:"https://powerful-coast-51545.herokuapp.com/auth/twitter/callback"
-// }), function(token, tokenSecret, profile, cb){
-//     User.findOrCreate({twitterId: profile.id}, function(err, user){
-//
-//     })
-// });
 /**
  * Get subreddits related to users tweets format into a multi
  * @param req.query.username twitter username
@@ -44,7 +35,7 @@ app.get("/auth/twitter/callback", function(req,res){
     function(req,res){
         res.send("success");
     }
-})
+});
 app.listen(process.env.PORT || 3000, function(err){
     if(err) throw err;
     console.log("Tweedit has started!");

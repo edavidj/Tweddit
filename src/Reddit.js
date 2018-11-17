@@ -2,17 +2,17 @@ const async     = require("async");
 const snoowrap  = require("snoowrap");
 const Request   = require("./Request");
 const randtoken = require("rand-token");
-const key       = "Whp_rCx6CInuHwCZK8VfQm3FHAM";
+const key       =  process.env.REDDIT_KEY;
 
 
 module.exports = (function(){
 
       const r = new snoowrap({
         userAgent: 'Tweedit by Mirira',
-        clientId: '1kSrspmMM6VjyQ',
-        clientSecret: 'vCuw5wjGs5b_HJYyPmx6ur-enfc',
+        clientId: process.env.CLIENTID,
+        clientSecret: process.env.CLIENTSECRET,
         username: 'Mirira',
-        password: '323450205',
+        password: process.env.REDDIT_PASS,
         accessToken: key
       })
     //private functions
@@ -22,7 +22,7 @@ module.exports = (function(){
      * @param {String[]} tags tags from twitter analysis
      */
     function createMulti(res,tags){
-      var subredditNames = [];
+      const subredditNames = [];
       async.each(tags, function(tag, callback){
           let options = {
             url:"https://oauth.reddit.com/api/subreddits_by_topic?query="+tag,
@@ -31,13 +31,11 @@ module.exports = (function(){
               "Authorization": "bearer " + key
             }
           }
-//curl -X POST -d 'grant_type=password&username=Mirira&password=323450205' --user '1kSrspmMM6VjyQ:vCuw5wjGs5b_HJYyPmx6ur-enfc' https://www.reddit.com/api/v1/access_token
-//curl -H "Authorization: bearer 9INSRKBgxfJJCpS5Y86fyta-v7I" -A "Tweedit by Mirira" https://oauth.reddit.com/api/subreddits_by_topic?query=technology
           Request(res, options, (subreddits) => {
               subredditNames = subredditNames.concat(JSON.parse(subreddits));
               callback();
           });
-        }, function(err){
+        }, (err) => {
             if(err) throw err;
             let formattedSubs = [];
             for(var i of subredditNames){
@@ -68,7 +66,7 @@ module.exports = (function(){
             // console.log(err)
         });
         r.getUser('mirira').getMultireddit(token).edit({visibility:'public'})
-        for (var i = 0; i < fs.length; i++) {
+        for (let i = 0; i < fs.length; i++) {
             if (i >= 100) {
                 break
             }
@@ -78,10 +76,10 @@ module.exports = (function(){
     }
 
     function prioritySort(data){
-        var checked = new Set();
-        var counts = {};
-        var output = [];
-        for(var i = 0; i < data.length; i++){
+        const checked = new Set();
+        const counts = {};
+        const output = [];
+        for(let i = 0; i < data.length; i++){
             if(!checked.has(data[i].name)){
                 checked.add(data[i].name);
                 counts[data[i].name] = 1;
@@ -90,7 +88,7 @@ module.exports = (function(){
             }
         }
         let keys = Object.keys(counts);
-        for(var j = 0; j < keys.length; j++){
+        for(let j = 0; j < keys.length; j++){
             let o = {}
             o[keys[j]] = counts[keys[j]];
             output.push( o );
@@ -103,7 +101,7 @@ module.exports = (function(){
             return 0;
         });
         let finalOut = [];
-        for(var k = 0; k < output.length; k++){
+        for(let k = 0; k < output.length; k++){
             let key = Object.keys(output[k])[0];
             finalOut.push(key);
         }
@@ -115,24 +113,6 @@ module.exports = (function(){
         createMulti: function(res, tags){
             createMulti(res,tags);
          },test: function(res){
-        // let multi_copy = {
-        //     url:"https://oauth.reddit.com/api/multi/copy",
-        //     method:"POST",
-        //     body: {
-        //       display_name: "tweeditcopy",
-        //       from: "user/Mirira/m/tweedit",
-        //       to: "user/edavidj1"
-        //     },
-        //     headers:{
-        //       'User-Agent': 'Tweedit by Mirira',
-        //       "Authorization": "bearer " + key
-        //     },
-        //     json: true
-        //   }
-        //   Request(res, multi_copy, (response)=>{
-        //     res.send(response);
-        //   })
-        //  }
     }
     };
 })();
